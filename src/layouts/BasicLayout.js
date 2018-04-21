@@ -1,23 +1,52 @@
-import React, { Fragment } from 'react';
+import React, {
+  Fragment
+} from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Icon, message } from 'antd';
+import {
+  Layout,
+  Icon,
+  message
+} from 'antd';
 import DocumentTitle from 'react-document-title';
-import { connect } from 'dva';
-import { Route, Redirect, Switch, routerRedux } from 'dva/router';
-import { ContainerQuery } from 'react-container-query';
+import {
+  connect
+} from 'dva';
+import {
+  Route,
+  Redirect,
+  Switch,
+  routerRedux
+} from 'dva/router';
+import {
+  ContainerQuery
+} from 'react-container-query';
 import classNames from 'classnames';
-import { enquireScreen, unenquireScreen } from 'enquire-js';
+import {
+  enquireScreen,
+  unenquireScreen
+} from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
-import { getRoutes } from '../utils/utils';
+import {
+  getRoutes
+} from '../utils/utils';
 import Authorized from '../utils/Authorized';
-import { getMenuData } from '../common/menu';
+import {
+  getMenuData
+} from '../common/menu';
 import logo from '../assets/logo.svg';
 
-const { Content, Header, Footer } = Layout;
-const { AuthorizedRoute, check } = Authorized;
+const {
+  Content,
+  Header,
+  Footer
+} = Layout;
+const {
+  AuthorizedRoute,
+  check
+} = Authorized;
 
 /**
  * 根据菜单取得重定向地址.
@@ -92,7 +121,10 @@ class BasicLayout extends React.PureComponent {
     isMobile,
   };
   getChildContext() {
-    const { location, routerData } = this.props;
+    const {
+      location,
+      routerData
+    } = this.props;
     return {
       location,
       breadcrumbNameMap: getBreadcrumbNameMap(getMenuData(), routerData),
@@ -108,15 +140,20 @@ class BasicLayout extends React.PureComponent {
       type: 'user/fetchCurrent',
     });
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     unenquireScreen(this.enquireHandler);
   }
   getPageTitle() {
-    const { routerData, location } = this.props;
-    const { pathname } = location;
+    const {
+      routerData,
+      location
+    } = this.props;
+    const {
+      pathname
+    } = location;
     let title = 'Ant Design Pro';
     if (routerData[pathname] && routerData[pathname].name) {
-      title = `${routerData[pathname].name} - Ant Design Pro`;
+      title = `${routerData[pathname].name} - Begin Design Pro`;
     }
     return title;
   }
@@ -131,7 +168,9 @@ class BasicLayout extends React.PureComponent {
       urlParams.searchParams.delete('redirect');
       window.history.replaceState(null, 'redirect', urlParams.href);
     } else {
-      const { routerData } = this.props;
+      const {
+        routerData
+      } = this.props;
       // get the first authorized route path in routerData
       const authorizedPath = Object.keys(routerData).find(
         item => check(routerData[item].authority, item) && item !== '/'
@@ -153,7 +192,9 @@ class BasicLayout extends React.PureComponent {
       payload: type,
     });
   };
-  handleMenuClick = ({ key }) => {
+  handleMenuClick = ({
+    key
+  }) => {
     if (key === 'triggerError') {
       this.props.dispatch(routerRedux.push('/exception/trigger'));
       return;
@@ -273,7 +314,11 @@ class BasicLayout extends React.PureComponent {
   }
 }
 
-export default connect(({ user, global, loading }) => ({
+export default connect(({
+  user,
+  global,
+  loading
+}) => ({
   currentUser: user.currentUser,
   collapsed: global.collapsed,
   fetchingNotices: loading.effects['global/fetchNotices'],
