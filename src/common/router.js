@@ -1,11 +1,7 @@
-import {
-  createElement
-} from 'react';
+import { createElement } from 'react';
 import dynamic from 'dva/dynamic';
 import pathToRegexp from 'path-to-regexp';
-import {
-  getMenuData
-} from './menu';
+import { getMenuData} from './menu';
 
 let routerDataCache;
 
@@ -210,13 +206,13 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, [], () =>
         import ('../routes/User/RegisterResult')),
     },
-    '/new/page1': {
+    '/config/select': {
       component: dynamicWrapper(app, ['monitor'], () =>
-        import ('../routes/New/Page1')),
+        import ('../routes/Config/SelectList')),
     },
-    '/new/page2': {
+    '/config/add': {
       component: dynamicWrapper(app, [], () =>
-        import ('../routes/New/Page2')),
+        import ('../routes/Config/Add')),
     },
   };
   // Get name from ./menu.js or just set it in the router data.

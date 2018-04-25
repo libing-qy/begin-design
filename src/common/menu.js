@@ -120,16 +120,16 @@ const menuData = [{
     path: 'register-result',
   }],
 }, {
-  name: '新布局',
-  icon: 'table',
-  path: 'new',
+  name: '配置',
+  icon: 'setting',
+  path: 'config',
   // hideInMenu: true,
   children: [{
-    name: '页面一',
-    path: 'page1',
+    name: '查询配置信息',
+    path: 'select',
   }, {
-    name: '页面二',
-    path: 'page2',
+    name: '添加配置',
+    path: 'add',
 
   }],
 }, ];
