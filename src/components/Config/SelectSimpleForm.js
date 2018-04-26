@@ -1,4 +1,5 @@
 import React , {PureComponent}from 'react';
+import { connect } from 'dva';
 import { Row, Col, Card, Form, Input,
   Select, Icon, Button, Dropdown, Menu, InputNumber,
   DatePicker, Modal, message, Badge, Checkbox,} from 'antd';
@@ -6,13 +7,30 @@ import { Row, Col, Card, Form, Input,
   const FormItem = Form.Item;
   const { Option } = Select;
 
-  export default class SelectSimpleForm extends PureComponent {
+  @connect(({ loading }) => ({
+    submitting: loading.effects['form/submitConfigForm'],
+  }))
+
+
+  class SelectFrom extends PureComponent {
     constructor(props) {
       super(props);
-
+      this.handleSearch = this.handleSearch.bind(this);
     }
 
     handleSearch(event) {
+      event.preventDefault();
+      this.props.form.validateFields((err, values) => {
+        if (!err) {
+          this.props.dispatch({
+            type: 'form/submitConfigForm',
+            payload: values,
+            onResult(res) {
+              console.log(`handleSearch:`+ res.text);
+            }
+          });
+        }
+      });
 
     }
 
@@ -31,14 +49,17 @@ import { Row, Col, Card, Form, Input,
         sm: { span: 16 },
       },
     };
+    const { getFieldDecorator } = this.props.form;
     return(
-      <Form className="ant-advanced-search-form"
-      onSubmit={this.handleSearch}>
+      <Form className="ant-advanced-search-form" onSubmit={this.handleSearch}>
 
       <Row gutter={24}>
       <FormItem {...formItemLayout} icon="key" label="Keys">
-
-      <Input placeholder="请输入" />
+      {getFieldDecorator('key', {
+        rules: [{ required: false }],
+      })(
+      <Input placeholder="Key" />
+      )}
 
       </FormItem>
       </Row>
@@ -46,8 +67,12 @@ import { Row, Col, Card, Form, Input,
 
       <Row gutter={24}>
       <FormItem {...formItemLayout} label="Server">
-      <Input placeholder="请输入" />
 
+      {getFieldDecorator('sId', {
+        rules: [{ required: false }],
+      })(
+      <Input placeholder="请输入" />
+      )}
       </FormItem>
       </Row>
 
@@ -84,3 +109,6 @@ import { Row, Col, Card, Form, Input,
 
   }
 }
+const SelectSimpleForm = Form.create()(SelectFrom);
+
+export default SelectSimpleForm;

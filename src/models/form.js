@@ -1,6 +1,7 @@
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
 import { fakeSubmitForm } from '../services/api';
+import { queryConfig} from '../services/config';
 
 export default {
   namespace: 'form',
@@ -12,6 +13,7 @@ export default {
       receiverName: 'Alex',
       amount: '500',
     },
+    configs:[],
   },
 
   effects: {
@@ -31,6 +33,24 @@ export default {
       yield call(fakeSubmitForm, payload);
       message.success('提交成功');
     },
+
+    *submitConfigForm222({payload}, {call, put}) {
+      yield call(queryConfig, payload);
+      yield console.log(payload);
+      yield put({
+        type: 'getConfigFormData',
+        payload,
+      });
+    },
+
+    *submitConfigForm({payload}, {call, put}) {
+      const result = yield call(queryConfig, payload);
+      yield put({
+          type: 'getConfigFormData',
+          payload: result
+      });
+      // yield put(routerRedux.push('/config/select'));
+    }
   },
 
   reducers: {
@@ -43,5 +63,12 @@ export default {
         },
       };
     },
+    getConfigFormData(state, {payload}) {
+
+      return {
+          ...state,
+          configs: payload
+      }
+    }
   },
 };

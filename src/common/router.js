@@ -207,7 +207,7 @@ export const getRouterData = app => {
         import ('../routes/User/RegisterResult')),
     },
     '/config/select': {
-      component: dynamicWrapper(app, ['monitor'], () =>
+      component: dynamicWrapper(app, ['monitor','form'], () =>
         import ('../routes/Config/SelectList')),
     },
     '/config/add': {

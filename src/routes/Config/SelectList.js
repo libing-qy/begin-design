@@ -10,26 +10,24 @@ import SelectSimpleForm from '../../components/Config/SelectSimpleForm';
 import SelectTableList from '../../components/Config/SelectTableList';
 
 export default class SelectList extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+	state = {
+		configs:[]
+	}
 
-
-	newData() {
+	componentDidMount() {
 		let dataList = [];
-		for (let i = 0; i < 15; i++) {
-			dataList.push({
-				key: i,
-				name: `Edward King ${i}`,
-				age: 32,
-				address: `London, Park Lane no. ${i}`,
-			});
-		}
-		return dataList;
+
+		this.setState({configs: dataList});
 	}
 	render() {
 		return (
 			<PageHeaderLayout title="配置管理">
 			<Row>
 			<Col span={18} push={6}>
-			<SelectTableList data={this.newData()}/>
+			<SelectTableList data={this.state.configs}/>
 			</Col>
 			<Col span={1} push={23} />
 			<Col span={5} pull={19} >

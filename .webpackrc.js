@@ -22,4 +22,10 @@ export default {
   disableDynamicImport: true,
   publicPath: '/',
   hash: true,
+  proxy: [{
+    context: ['/config/**', '/u/**'],
+    target: 'http://127.0.0.1:9040/config/*',
+    secure: false
+  }
+  ],
 };
