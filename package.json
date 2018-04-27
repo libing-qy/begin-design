@@ -71,6 +71,7 @@
     "fork": "^1.3.1",
     "gh-pages": "^1.0.0",
     "history": "^4.7.2",
+    "http-proxy-middleware": "^0.18.0",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "mockjs": "^1.0.1-beta3",
@@ -106,5 +107,6 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 10"
-  ]
+  ],
+  "proxy":"http://localhost:9040/"
 }

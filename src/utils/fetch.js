@@ -1,6 +1,5 @@
 import store from '../index';
-import fetch from 'dva/fetch';
-// const fetch = require('node-fetch');
+import axios from 'axios';
 import { routerRedux } from 'dva/router';
 function parseText(response) {
   console.log(`parseText : `);
@@ -25,18 +24,17 @@ function checkStatus(response) {
  * @return {object}           An object containing either "data" or "err"
  */
  export default function request(url, options) {
-    console.log(`fetch.request`+ url);
-    return fetch(url, options)
-    .then(checkStatus)
-    .then(parseText)
-    .then((data) => {
-      console.log(data);
-      return data;
-    })
-    .catch((err) => {
-      const { dispatch } = store;
-      const status = err.name;
-      console.log(`status:  ` + status);
-      dispatch(routerRedux.push('/exception/403'));
-     });
-  }
+
+  axios.get(url).then(checkStatus).then(parseText)
+  .then(res => {
+    console.log(res.data);
+    console.log(res.status);
+    console.log(res.statusText);
+    console.log(res.headers);
+    console.log(res.config);
+  });
+
+}
+
+
+
