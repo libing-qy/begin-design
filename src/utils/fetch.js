@@ -10,7 +10,7 @@ function checkStatus(response) {
     console.log(`response success`);
     return response;
   }
-  console.log(`响应异常了`);
+  console.log(`响应异常了1`);
   const error = new Error(response.statusText);
   error.response = response;
   throw error;
