@@ -1,5 +1,5 @@
 const path = require('path');
-
+console.log(`webPackSrc.js => path:` + path);
 export default {
   entry: 'src/index.js',
   extraBabelPlugins: [

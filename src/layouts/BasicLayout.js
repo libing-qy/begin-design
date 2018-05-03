@@ -1,52 +1,23 @@
-import React, {
-  Fragment
-} from 'react';
+import React, { Fragment} from 'react';
 import PropTypes from 'prop-types';
-import {
-  Layout,
-  Icon,
-  message
-} from 'antd';
+import { Layout, Icon, message} from 'antd';
 import DocumentTitle from 'react-document-title';
-import {
-  connect
-} from 'dva';
-import {
-  Route,
-  Redirect,
-  Switch,
-  routerRedux
-} from 'dva/router';
-import {
-  ContainerQuery
-} from 'react-container-query';
+import { connect} from 'dva';
+import { Route, Redirect, Switch, routerRedu} from 'dva/router';
+import { ContainerQuery} from 'react-container-query';
 import classNames from 'classnames';
-import {
-  enquireScreen,
-  unenquireScreen
-} from 'enquire-js';
+import { enquireScreen, unenquireScreen} from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
-import {
-  getRoutes
-} from '../utils/utils';
+import { getRoutes} from '../utils/utils';
 import Authorized from '../utils/Authorized';
-import {
-  getMenuData
-} from '../common/menu';
+import { getMenuData} from '../common/menu';
 import logo from '../assets/logo.svg';
 
-const {
-  Content,
-  Header,
-  Footer
-} = Layout;
-const {
-  AuthorizedRoute,
-  check
-} = Authorized;
+const { Content, Header, Footer} = Layout;
+const { AuthorizedRoute, check} = Authorized;
 
 /**
  * 根据菜单取得重定向地址.
@@ -121,10 +92,7 @@ class BasicLayout extends React.PureComponent {
     isMobile,
   };
   getChildContext() {
-    const {
-      location,
-      routerData
-    } = this.props;
+    const { location, routerData } = this.props;
     return {
       location,
       breadcrumbNameMap: getBreadcrumbNameMap(getMenuData(), routerData),
@@ -238,7 +206,7 @@ class BasicLayout extends React.PureComponent {
           onCollapse={this.handleMenuCollapse}
         />
         <Layout>
-          <Header style={{ padding: 0 }}>
+           <Header style={{ padding: 0 }}>
             <GlobalHeader
               logo={logo}
               currentUser={currentUser}
@@ -275,8 +243,8 @@ class BasicLayout extends React.PureComponent {
             <GlobalFooter
               links={[
                 {
-                  key: 'Pro 首页',
-                  title: 'Pro 首页',
+                  key: 'Begin 首页',
+                  title: 'Begin 首页',
                   href: 'http://pro.ant.design',
                   blankTarget: true,
                 },
@@ -295,7 +263,7 @@ class BasicLayout extends React.PureComponent {
               ]}
               copyright={
                 <Fragment>
-                  Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
+                  Copyright <Icon type="copyright" /> 2018 测试服务工具
                 </Fragment>
               }
             />
